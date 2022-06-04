@@ -1,0 +1,43 @@
+<form>
+    <div>
+      <label for="firstName">First name:</label><br>
+      <input formControlName="firstName" type="text" id="firstName" name="firstName">
+    </div>
+    <div>
+      <label for="lastName">Last name:</label><br>
+      <input formControlName="lastName" type="text" id="lastName" name="lastName">
+    </div>
+  
+    <div>
+      Choose a book: <br>
+      <select id="books" name="books">
+        <option value="harry-potter">Harry Potter</option>
+        <option value="7habits">7 Habits</option>
+        <option value="lordoftherings">Lord Of The Rings</option>
+        <option value="cracking-coding-interview">Cracking the Coding Interview</option>
+      </select>
+    </div>
+  
+    <div>
+      Favorite Framework: <br>
+      <input formControlName="favoriteFramework" type="radio" id="angular" name="favoriteFramework" value="Angular">
+      <label for="angular">Angular</label><br>
+      <input formControlName="favoriteFramework" type="radio" id="react" name="favoriteFramework" value="React">
+      <label for="react">React</label><br>
+      <input formControlName="favoriteFramework" type="radio" id="vue" name="favoriteFramework" value="Vue">
+      <label for="vue">Vue</label>
+    </div>
+  
+    <div>
+      Favorite Language: <br>
+      <input formControlName="csharp" type="checkbox" id="csharp" name="csharp" value="csharp">
+      <label for="csharp"> C#</label><br>
+      <input formControlName="java" type="checkbox" id="java" name="java" value="java">
+      <label for="java"> Java</label><br>
+      <input formControlName="javascript" type="checkbox" id="javascript" name="javascript" value="javascript">
+      <label for="javascript"> JavaScript</label><br>
+    </div>
+  
+  
+    <!-- <button (click)="submit()" [disabled]="!form.valid">Submit</button> -->
+  </form>
