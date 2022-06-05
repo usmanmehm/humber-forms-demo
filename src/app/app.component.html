@@ -1,50 +1,50 @@
 
 
 <form [formGroup]="form">
+
+  <h1>Sections:</h1>
+  <div *ngFor="let section of sections">
+    <h3>{{ section }}</h3>
+    <div *ngFor="let question of questions">
+      <div *ngIf="question.section === section">
+        <label [for]="question.control">{{ question.label }}</label>
+        <input type="text" [formControlName]="question.control"><span>  /  {{question.marks}}</span>
+      </div>
+    </div>
+  </div>
+
   <div>
+    <label for="">Feedback: </label><br>
+    <input class="large" width="500px" type="text">
+  </div>
+
+  <!-- <div>
+
+    <h1>Git</h1>
     <label
-      [class.error]="!form.get('firstName')?.valid && form.get('firstName')?.touched"
-      for="fname">First name:</label><br>
+    for="q1">1)	Forked repository correctly ( / 1)</label><br>
     <input
-      [class.error]="!form.get('firstName')?.valid && form.get('firstName')?.touched"
-      formControlName="firstName"
+      formControlName="q1"
       type="text"
-      id="fname"
-      name="fname">
+      id="q1"
+      name="q1">
   </div>
+
   <div>
-    <label for="lname">Last name:</label><br>
+    <h1>Routing</h1>
+    <label
+    for="q1">1)	Forked repository correctly ( / 1)</label><br>
     <input
-      [class.error]="!form.get('lastName')?.valid && form.get('lastName')?.touched"
-      formControlName="lastName"
+      formControlName="q2"
       type="text"
-      id="lname"
-      name="lname">
-  </div>
+      id="q2"
+      name="q2">
+  </div> -->
+  
+  <h3>Total: {{totalMarks}} /  {{fullMarks}}</h3>
 
-  <div>
-    Favorite Framework: <br>
-    <input formControlName="favoriteFramework" type="radio" id="angular" name="favoriteFramework" value="angular">
-    <label for="angular">Angular</label><br>
-    <input formControlName="favoriteFramework" type="radio" id="react" name="favoriteFramework" value="react">
-    <label for="react">React</label><br>
-    <input formControlName="favoriteFramework" type="radio" id="vue" name="favoriteFramework" value="vue">
-    <label for="vue">Vue</label><br>
-  </div>
-
-
-  <div>
-    Favorite Language: <br>
-    <input formControlName="csharp" type="checkbox" id="csharp" name="csharp" value="csharp">
-    <label for="csharp"> C#</label><br>
-    <input formControlName="java" type="checkbox" id="java" name="java" value="java">
-    <label for="java"> Java</label><br>
-    <input formControlName="javaScript" type="checkbox" id="javascript" name="javascript" value="javascript">
-    <label for="javascript"> JavaScript</label><br>
-  </div>
-
-
-  <button [disabled]="!form.valid" (click)="submit()">Submit</button>
+  <button (click)="submit()">Submit</button>
+  <button (click)="populateFullMarks()">Populate Full Marks</button>
 </form>
 
 
