@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   totalMarks = 0;
   fullMarks = 0;
 
+  age: any;
+
   ngOnInit(): void {
     this.form = new FormGroup({
       q1: new FormControl('', Validators.required),

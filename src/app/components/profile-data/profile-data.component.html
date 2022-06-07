@@ -1,14 +1,48 @@
-<form>
+<form [formGroup]="form">
+    
     <div>
       <label for="firstName">First name:</label><br>
-      <input formControlName="firstName" type="text" id="firstName" name="firstName">
+      <div class="error" *ngIf="form.get('firstName')?.dirty">
+        <p *ngIf="form.get('firstName')?.errors?.['forbiddenCharacters']">
+          There are numbers present in your name
+        </p>
+        <p *ngIf="form.get('firstName')?.errors?.['exceededMaxLength']">
+          You have exceeded the maximum name length
+        </p>
+        <p *ngIf="form.get('firstName')?.errors?.['spaces']">
+          Spaces are not allowed in your name!
+        </p>
+      </div>
+      <input
+        [class.error]="form.get('firstName')?.errors && form.get('firstName')?.dirty"
+        formControlName="firstName"
+        type="text"
+        id="firstName"
+        name="firstName">
     </div>
     <div>
       <label for="lastName">Last name:</label><br>
       <input formControlName="lastName" type="text" id="lastName" name="lastName">
     </div>
-  
+    
+
     <div>
+      Are you over 18? <br>
+      <input formControlName="over18" type="radio" id="yes" value="yes">
+      <label for="yes">Yes</label><br>
+      <input formControlName="over18" type="radio" id="no" value="no">
+      <label for="no">No</label><br>
+    </div>
+
+    <div class="error" *ngIf="form.get('parentSignature')?.touched && form.errors?.['requiresParentalConsent']">
+      Please get your parent's consent!
+    </div>
+    <div *ngIf="form.get('over18')?.value === 'no'">
+      <label for="parentSignature">Parent Signature:</label><br>
+      <input formControlName="parentSignature" type="text" id="parentSignature" name="parentSignature">
+    </div>
+  
+    <!-- <div>
       Choose a book: <br>
       <select id="books" name="books">
         <option value="harry-potter">Harry Potter</option>
@@ -18,15 +52,7 @@
       </select>
     </div>
   
-    <div>
-      Favorite Framework: <br>
-      <input formControlName="favoriteFramework" type="radio" id="angular" name="favoriteFramework" value="Angular">
-      <label for="angular">Angular</label><br>
-      <input formControlName="favoriteFramework" type="radio" id="react" name="favoriteFramework" value="React">
-      <label for="react">React</label><br>
-      <input formControlName="favoriteFramework" type="radio" id="vue" name="favoriteFramework" value="Vue">
-      <label for="vue">Vue</label>
-    </div>
+    
   
     <div>
       Favorite Language: <br>
@@ -36,8 +62,9 @@
       <label for="java"> Java</label><br>
       <input formControlName="javascript" type="checkbox" id="javascript" name="javascript" value="javascript">
       <label for="javascript"> JavaScript</label><br>
-    </div>
+    </div> -->
   
-  
-    <!-- <button (click)="submit()" [disabled]="!form.valid">Submit</button> -->
+    <br>
+    <button (click)="submit()" [disabled]="!form.valid">Submit</button>
+    <h4>Is Form Valid? {{ form.valid ? "Yes" : "No" }} </h4>
   </form>
