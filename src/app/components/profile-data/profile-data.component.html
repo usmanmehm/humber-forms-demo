@@ -1,6 +1,32 @@
 <form [formGroup]="form">
+
+
+  <div>
+    <label for="address">Address</label><br>
+    <input formControlName="address" id="address" type="text" appMaxLength [maxLength]="10" [formCtrl]="form.get('address')">
+  </div>
+  <div>
+    <label for="city">City</label><br>
+    <input formControlName="city" id="city" type="text">
+  </div>
+  <div>
+    <label for="postalCode">Postal Code</label><br>
+    <input formControlName="postalCode" id="postalCode" type="text">
+  </div>
+  <div>
+    <label for="country">Country</label><br>
+    <select formControlName="country" name="country" id="country">
+      <option value="US">US</option>
+      <option value="canada">Canada</option>
+    </select>
+  </div>
+
+
+
+
+
     
-    <div>
+    <!-- <div>
       <label for="firstName">First name:</label><br>
       <div class="error" *ngIf="form.get('firstName')?.dirty">
         <p *ngIf="form.get('firstName')?.errors?.['forbiddenCharacters']">
@@ -41,7 +67,7 @@
       <label for="parentSignature">Parent Signature:</label><br>
       <input formControlName="parentSignature" type="text" id="parentSignature" name="parentSignature">
     </div>
-  
+   -->
     <!-- <div>
       Choose a book: <br>
       <select id="books" name="books">

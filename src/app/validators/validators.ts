@@ -28,3 +28,29 @@ export function parentalConsent(): ValidatorFn {
         return null; // means valid
     }
 }
+
+
+
+
+export function postalCodeValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null =>  {
+
+        const regex1 = /[A-Z]\d[A-Z]\s\d[A-Z]\d/g;
+        const regex2 = /[A-Z]\d[A-Z]\d[A-Z]\d/g
+        if (control.get('country')?.value === 'canada' || !control.get('country')?.value) {
+            if (control.get('postalCode')?.value.match(regex1) || control.get('postalCode')?.value.match(regex2)) {
+                return null;
+            }
+
+            return { invalidCadPostalCode: true};
+        } else if (control.get('country')?.value === 'US') {
+            if (control.get('postalCode')?.value.match(/\d\d\d\d\d/g) && control.get('postalCode')?.value.length === 5) {
+                return null;
+            }
+
+            return { invalidUSPostalCode: true };
+        }
+
+        return null;
+    }
+}

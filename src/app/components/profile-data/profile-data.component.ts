@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { nameValidator, parentalConsent } from 'src/app/validators/validators';
+import { debounceTime, Subscription } from 'rxjs';
+import { nameValidator, parentalConsent, postalCodeValidator } from 'src/app/validators/validators';
 
 @Component({
   selector: 'app-profile-data',
   templateUrl: './profile-data.component.html',
   styleUrls: ['./profile-data.component.scss']
 })
-export class ProfileDataComponent implements OnInit {
+export class ProfileDataComponent implements OnInit, OnDestroy {
   form!: FormGroup;
+  formSubscription!: Subscription;
   constructor() { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      firstName: new FormControl('', [nameValidator()]),
-      lastName: new FormControl('', [nameValidator()]),
-      over18: new FormControl('', Validators.required),
-      parentSignature: new FormControl(''),
-    }, parentalConsent())
+      address: new FormControl(''),
+      city: new FormControl(''),
+      postalCode: new FormControl(''),
+      country: new FormControl('')
+    }, postalCodeValidator())
+
   }
 
   isFormValid() {
@@ -28,6 +31,10 @@ export class ProfileDataComponent implements OnInit {
   submit() {
     console.log(this.form.value);
     
+  }
+
+  ngOnDestroy(): void {
+    // this.formSubscription.unsubscribe();
   }
 
 }
