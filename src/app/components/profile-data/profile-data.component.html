@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form">
     <div>
       <label for="firstName">First name:</label><br>
       <input formControlName="firstName" type="text" id="firstName" name="firstName">
@@ -7,8 +7,24 @@
       <label for="lastName">Last name:</label><br>
       <input formControlName="lastName" type="text" id="lastName" name="lastName">
     </div>
-  
+   
     <div>
+      <p>Are you over 18?</p>
+      <input formControlName="over18" type="radio" id="yes" value="yes">
+      <label for="yes">Yes</label><br>
+      <input formControlName="over18" type="radio" id="no" value="no">
+      <label for="no">No</label><br>
+    </div>
+    
+    <div *ngIf="form.get('parentSignature')?.touched && form.errors?.['parentSignatureRequired']">
+      Please provide your parental consent!
+    </div>
+    <div *ngIf="form.get('over18')?.value === 'no'">
+      <label for="parentSignature">Parent Signature</label><br>
+      <input formControlName="parentSignature" type="text" id="parentSignature" name="parentSignature">
+    </div>
+  
+    <!-- <div>
       Choose a book: <br>
       <select id="books" name="books">
         <option value="harry-potter">Harry Potter</option>
@@ -36,8 +52,8 @@
       <label for="java"> Java</label><br>
       <input formControlName="javascript" type="checkbox" id="javascript" name="javascript" value="javascript">
       <label for="javascript"> JavaScript</label><br>
-    </div>
+    </div> -->
   
-  
-    <!-- <button (click)="submit()" [disabled]="!form.valid">Submit</button> -->
+    <br>
+    <button (click)="submit()" [disabled]="!form.valid">Submit</button>
   </form>
